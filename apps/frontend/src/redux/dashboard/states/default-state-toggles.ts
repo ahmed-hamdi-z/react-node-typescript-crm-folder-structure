@@ -1,0 +1,33 @@
+import { TogglesState } from "@/interfaces/dashboard/toggles-interface";
+
+export const defaultTogglesState: TogglesState = {
+    isDarkMode: false,
+    mainLayout: 'app',
+    theme: 'light',
+    menu: 'vertical',
+    layout: 'full',
+    rtlClass: 'ltr',
+    animation: '',
+    navbar: 'navbar-sticky',
+    locale: 'en',
+    sidebar: false,
+    pageTitle: '',
+    languageList: [
+        { code: 'zh', name: 'Chinese' },
+        { code: 'da', name: 'Danish' },
+        { code: 'en', name: 'English' },
+        { code: 'fr', name: 'French' },
+        { code: 'de', name: 'German' },
+        { code: 'el', name: 'Greek' },
+        { code: 'hu', name: 'Hungarian' },
+        { code: 'it', name: 'Italian' },
+        { code: 'ja', name: 'Japanese' },
+        { code: 'pl', name: 'Polish' },
+        { code: 'pt', name: 'Portuguese' },
+        { code: 'ru', name: 'Russian' },
+        { code: 'es', name: 'Spanish' },
+        { code: 'sv', name: 'Swedish' },
+        { code: 'tr', name: 'Turkish' },
+    ],
+    semidark: false,
+};
