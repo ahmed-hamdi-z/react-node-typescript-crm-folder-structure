@@ -11,7 +11,7 @@ import Loader from "@/components/global/PageLoading";
 // import Sidebar from './Sidebar';
 // import Portals from '@/components/Portals';
 
-const DefaultLayout = ({ children }: PropsWithChildren) => {
+const DashboardLayout = ({ children }: PropsWithChildren) => {
   const themeConfig = useSelector(
     (state: RootState) => state.dashboard.toggles
   );
@@ -115,4 +115,4 @@ const DefaultLayout = ({ children }: PropsWithChildren) => {
   );
 };
 
-export default DefaultLayout;
+export default DashboardLayout;

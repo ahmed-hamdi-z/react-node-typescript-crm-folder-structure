@@ -6,6 +6,7 @@ import MainProvider from "./components/global/MainProvider";
 import ThemeProvider from "./components/global/ThemeProvider";
 
 import Dashboard from "./layouts/dashboard";
+import Website from "./layouts/website";
 
 
 // Layouts
@@ -16,7 +17,7 @@ const App: React.FC = () => {
   return (
     <MainProvider>
    
-        {/* <Website /> */}
+        <Website />
         <Dashboard />
   
     </MainProvider>

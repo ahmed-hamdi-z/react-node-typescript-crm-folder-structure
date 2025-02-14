@@ -7,26 +7,25 @@ import { RouteObject } from "@/interfaces/global/routes-object-interfaces";
 // React Router
 import { Routes, Route } from "react-router-dom";
 
-import DashboardLayout from "./Layout";
-
 // Hooks
 import useRoute from "@/hooks/global/useRoute";
 
-Routes
-import dashboardRoutes from "@/routes/dashboard";
+// Routes
+import websiteRoutes from "@/routes/website";
 
 // Layout
-// const DashboardLayout = lazy(() => import("./Layout"));
-
+import WebsiteLayout from "./Layout";
 import { appRoutes } from "@/config";
 
-const Dashboard: FC = () => {
+
+
+const Website: FC = () => {
   const { validateRoutes } = useRoute();
-  const routes = validateRoutes(dashboardRoutes, ["global"]);
+  const routes = validateRoutes(websiteRoutes, ["global"]);
 
   return (
     <Routes>
-      <Route path={appRoutes.dashboard.path} element={<DashboardLayout />}>
+      <Route path={appRoutes.home} element={<WebsiteLayout />}>
         {
           routes.map((route: RouteObject, key: number) =>
             <Route
@@ -36,8 +35,8 @@ const Dashboard: FC = () => {
             />
           )}
       </Route>
-     </Routes>
+    </Routes>
   )
 }
 
-export default Dashboard;
+export default Website;
