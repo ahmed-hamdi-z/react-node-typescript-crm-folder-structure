@@ -1,0 +1,103 @@
+2025-02-15T14:24:48.374703Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf(".turbo\\cookies\\1.cookie"), AnchoredSystemPathBuf(".turbo\\cookies\\.turbo-cookie"), AnchoredSystemPathBuf(".turbo\\cookies")}
+2025-02-15T14:24:48.375437Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
+2025-02-15T14:24:48.489736Z  WARN daemon_server: turborepo_lib::commands::daemon: daemon already running
+2025-02-15T14:24:49.282794Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf(".turbo\\daemon\\386ff7a3bf986566-turbo.log.2025-02-15")}
+2025-02-15T14:24:49.283041Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
+2025-02-15T14:25:32.679378Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf(".turbo\\cookies"), AnchoredSystemPathBuf(".turbo")}
+2025-02-15T14:25:32.679526Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
+2025-02-15T14:27:01.991605Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps\\frontend\\src\\redux\\dashboard\\states\\initial-state-toggles.ts")}
+2025-02-15T14:27:01.991690Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("frontend"), path: AnchoredSystemPathBuf("apps\\frontend") }}))
+2025-02-15T14:27:49.979579Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps\\frontend\\src\\components\\global\\ThemeProvider\\index.tsx")}
+2025-02-15T14:27:49.979620Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("frontend"), path: AnchoredSystemPathBuf("apps\\frontend") }}))
+2025-02-15T14:28:49.876512Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps\\frontend\\src\\components\\global\\ThemeProvider\\index.tsx")}
+2025-02-15T14:28:49.876595Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("frontend"), path: AnchoredSystemPathBuf("apps\\frontend") }}))
+2025-02-15T14:29:40.776738Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps\\frontend\\src\\interfaces\\dashboard\\toggles-interface.ts")}
+2025-02-15T14:29:40.776768Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("frontend"), path: AnchoredSystemPathBuf("apps\\frontend") }}))
+2025-02-15T14:30:40.980999Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps\\frontend\\src\\redux\\dashboard\\states\\initial-state-toggles.ts")}
+2025-02-15T14:30:40.981108Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("frontend"), path: AnchoredSystemPathBuf("apps\\frontend") }}))
+2025-02-15T14:32:31.988228Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps\\frontend\\src\\redux\\dashboard\\states\\initial-state-toggles.ts")}
+2025-02-15T14:32:31.988674Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("frontend"), path: AnchoredSystemPathBuf("apps\\frontend") }}))
+2025-02-15T14:32:32.272009Z  WARN turborepo_lib::package_changes_watcher: hashes are the same, no need to rerun
+2025-02-15T14:34:53.087389Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps\\frontend\\src\\interfaces\\dashboard\\toggles-interface.ts")}
+2025-02-15T14:34:53.087415Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("frontend"), path: AnchoredSystemPathBuf("apps\\frontend") }}))
+2025-02-15T14:34:53.352681Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps\\frontend\\src\\interfaces\\dashboard\\toggles-interface.ts")}
+2025-02-15T14:34:53.352893Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("frontend"), path: AnchoredSystemPathBuf("apps\\frontend") }}))
+2025-02-15T14:34:53.353080Z  WARN turborepo_lib::package_changes_watcher: hashes are the same, no need to rerun
+2025-02-15T14:36:15.176218Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps\\frontend\\src\\redux\\dashboard\\slicers\\toggles-slicers.ts")}
+2025-02-15T14:36:15.176324Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("frontend"), path: AnchoredSystemPathBuf("apps\\frontend") }}))
+2025-02-15T14:36:15.344758Z  WARN turborepo_lib::package_changes_watcher: hashes are the same, no need to rerun
+2025-02-15T14:45:39.686221Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps\\frontend\\src\\redux\\dashboard\\toggles-config.ts")}
+2025-02-15T14:45:39.686307Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("frontend"), path: AnchoredSystemPathBuf("apps\\frontend") }}))
+2025-02-15T14:45:39.816347Z  WARN turborepo_lib::package_changes_watcher: hashes are the same, no need to rerun
+2025-02-15T14:45:50.472861Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps\\frontend\\src\\redux\\dashboard\\toggles-config.ts")}
+2025-02-15T14:45:50.472890Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("frontend"), path: AnchoredSystemPathBuf("apps\\frontend") }}))
+2025-02-15T14:47:24.978744Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps\\frontend\\src\\interfaces\\dashboard\\toggles-interface.ts")}
+2025-02-15T14:47:24.978802Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("frontend"), path: AnchoredSystemPathBuf("apps\\frontend") }}))
+2025-02-15T14:48:00.777003Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps\\frontend\\src\\interfaces\\dashboard\\toggles-interface.ts")}
+2025-02-15T14:48:00.777059Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("frontend"), path: AnchoredSystemPathBuf("apps\\frontend") }}))
+2025-02-15T14:48:01.024668Z  WARN turborepo_lib::package_changes_watcher: hashes are the same, no need to rerun
+2025-02-15T14:52:15.074739Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps\\frontend\\src\\interfaces\\dashboard\\toggles-interface.ts")}
+2025-02-15T14:52:15.074781Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("frontend"), path: AnchoredSystemPathBuf("apps\\frontend") }}))
+2025-02-15T14:54:13.680442Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps\\frontend\\src\\redux\\dashboard\\states\\initial-state-toggles.ts")}
+2025-02-15T14:54:13.680514Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("frontend"), path: AnchoredSystemPathBuf("apps\\frontend") }}))
+2025-02-15T14:55:09.273453Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps\\frontend\\src\\interfaces\\dashboard\\toggles-interface.ts")}
+2025-02-15T14:55:09.273480Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("frontend"), path: AnchoredSystemPathBuf("apps\\frontend") }}))
+2025-02-15T14:55:09.501094Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps\\frontend\\src\\interfaces\\dashboard\\toggles-interface.ts")}
+2025-02-15T14:55:09.501120Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("frontend"), path: AnchoredSystemPathBuf("apps\\frontend") }}))
+2025-02-15T14:55:09.501192Z  WARN turborepo_lib::package_changes_watcher: hashes are the same, no need to rerun
+2025-02-15T14:55:45.077523Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps\\frontend\\src\\interfaces\\dashboard\\toggles-interface.ts")}
+2025-02-15T14:55:45.077555Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("frontend"), path: AnchoredSystemPathBuf("apps\\frontend") }}))
+2025-02-15T14:56:02.476126Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps\\frontend\\src\\components\\global\\ThemeProvider\\index.tsx")}
+2025-02-15T14:56:02.476239Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("frontend"), path: AnchoredSystemPathBuf("apps\\frontend") }}))
+2025-02-15T14:57:32.484264Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps\\frontend\\src\\redux\\dashboard\\states\\initial-state-toggles.ts")}
+2025-02-15T14:57:32.484352Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("frontend"), path: AnchoredSystemPathBuf("apps\\frontend") }}))
+2025-02-15T14:57:32.805993Z  WARN turborepo_lib::package_changes_watcher: hashes are the same, no need to rerun
+2025-02-15T14:59:29.883439Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps\\frontend\\src\\interfaces\\dashboard\\toggles-interface.ts")}
+2025-02-15T14:59:29.883502Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("frontend"), path: AnchoredSystemPathBuf("apps\\frontend") }}))
+2025-02-15T14:59:34.277008Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps\\frontend\\src\\redux\\dashboard\\states\\initial-state-toggles.ts")}
+2025-02-15T14:59:34.277039Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("frontend"), path: AnchoredSystemPathBuf("apps\\frontend") }}))
+2025-02-15T15:00:16.274157Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps\\frontend\\src\\components\\global\\ThemeProvider\\index.tsx")}
+2025-02-15T15:00:16.274199Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("frontend"), path: AnchoredSystemPathBuf("apps\\frontend") }}))
+2025-02-15T15:00:16.743376Z  WARN turborepo_lib::package_changes_watcher: hashes are the same, no need to rerun
+2025-02-15T15:00:16.743666Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps\\frontend\\src\\components\\global\\ThemeProvider\\index.tsx")}
+2025-02-15T15:00:16.743682Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("frontend"), path: AnchoredSystemPathBuf("apps\\frontend") }}))
+2025-02-15T15:00:16.743789Z  WARN turborepo_lib::package_changes_watcher: hashes are the same, no need to rerun
+2025-02-15T15:01:56.915640Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps\\frontend\\src\\redux\\dashboard\\states\\initial-state-toggles.ts")}
+2025-02-15T15:01:56.915715Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("frontend"), path: AnchoredSystemPathBuf("apps\\frontend") }}))
+2025-02-15T15:01:57.252327Z  WARN turborepo_lib::package_changes_watcher: hashes are the same, no need to rerun
+2025-02-15T15:05:38.631451Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps\\frontend\\src\\redux\\dashboard\\states\\initial-state-toggles.ts")}
+2025-02-15T15:05:38.631574Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("frontend"), path: AnchoredSystemPathBuf("apps\\frontend") }}))
+2025-02-15T15:06:01.502879Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps\\frontend\\src\\components\\global\\ThemeProvider\\index.tsx")}
+2025-02-15T15:06:01.502912Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("frontend"), path: AnchoredSystemPathBuf("apps\\frontend") }}))
+2025-02-15T15:06:04.674663Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps\\frontend\\src\\redux\\dashboard\\states\\initial-state-toggles.ts")}
+2025-02-15T15:06:04.674692Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("frontend"), path: AnchoredSystemPathBuf("apps\\frontend") }}))
+2025-02-15T15:06:12.288535Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps\\frontend\\src\\redux\\dashboard\\states\\initial-state-toggles.ts")}
+2025-02-15T15:06:12.288630Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("frontend"), path: AnchoredSystemPathBuf("apps\\frontend") }}))
+2025-02-15T15:10:58.877884Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps\\frontend\\src\\interfaces\\dashboard\\toggles-interface.ts")}
+2025-02-15T15:10:58.877941Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("frontend"), path: AnchoredSystemPathBuf("apps\\frontend") }}))
+2025-02-15T15:11:23.686020Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps\\frontend\\src\\interfaces\\dashboard\\toggles-interface.ts")}
+2025-02-15T15:11:23.686050Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("frontend"), path: AnchoredSystemPathBuf("apps\\frontend") }}))
+2025-02-15T15:11:26.283461Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps\\frontend\\src\\redux\\dashboard\\actions\\toggles-actions.ts")}
+2025-02-15T15:11:26.283493Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("frontend"), path: AnchoredSystemPathBuf("apps\\frontend") }}))
+2025-02-15T15:11:43.877521Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps\\frontend\\src\\redux\\dashboard\\actions\\toggles-actions.ts")}
+2025-02-15T15:11:43.877554Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("frontend"), path: AnchoredSystemPathBuf("apps\\frontend") }}))
+2025-02-15T15:11:44.203265Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps\\frontend\\src\\redux\\dashboard\\actions\\toggles-actions.ts")}
+2025-02-15T15:11:44.203362Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("frontend"), path: AnchoredSystemPathBuf("apps\\frontend") }}))
+2025-02-15T15:11:44.203516Z  WARN turborepo_lib::package_changes_watcher: hashes are the same, no need to rerun
+2025-02-15T15:12:05.179653Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps\\frontend\\src\\redux\\dashboard\\actions\\toggles-actions.ts")}
+2025-02-15T15:12:05.179701Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("frontend"), path: AnchoredSystemPathBuf("apps\\frontend") }}))
+2025-02-15T15:12:05.601639Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps\\frontend\\src\\redux\\dashboard\\actions\\toggles-actions.ts")}
+2025-02-15T15:12:05.601666Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("frontend"), path: AnchoredSystemPathBuf("apps\\frontend") }}))
+2025-02-15T15:12:05.601824Z  WARN turborepo_lib::package_changes_watcher: hashes are the same, no need to rerun
+2025-02-15T15:12:16.879842Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps\\frontend\\src\\redux\\dashboard\\actions\\toggles-actions.ts")}
+2025-02-15T15:12:16.879885Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("frontend"), path: AnchoredSystemPathBuf("apps\\frontend") }}))
+2025-02-15T15:12:37.804619Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps\\frontend\\src\\components\\global\\ThemeProvider\\index.tsx")}
+2025-02-15T15:12:37.804661Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("frontend"), path: AnchoredSystemPathBuf("apps\\frontend") }}))
+2025-02-15T15:12:38.019062Z  WARN turborepo_lib::package_changes_watcher: hashes are the same, no need to rerun
+2025-02-15T15:42:25.058846Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf(".turbo\\cookies\\1.cookie"), AnchoredSystemPathBuf(".turbo\\cookies")}
+2025-02-15T15:42:25.058907Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
+2025-02-15T15:42:25.179300Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf(".turbo\\cookies\\.turbo-cookie"), AnchoredSystemPathBuf(".turbo\\cookies"), AnchoredSystemPathBuf(".turbo\\cookies\\1.cookie")}
+2025-02-15T15:42:25.179380Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
+2025-02-15T15:42:25.223540Z  WARN daemon_server: turborepo_lib::commands::daemon: daemon already running
+2025-02-15T15:42:25.859032Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf(".turbo\\daemon\\386ff7a3bf986566-turbo.log.2025-02-15")}
+2025-02-15T15:42:25.859073Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))

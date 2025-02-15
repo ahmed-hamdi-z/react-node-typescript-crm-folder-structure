@@ -11,7 +11,7 @@ const togglesConfig: TogglesState = {
     semidark: false,
     isDarkMode: false,
     languageList: [],
-    sidebar: "",
+    sidebar: false,
     mainLayout: "",
     pageTitle: ""
 };

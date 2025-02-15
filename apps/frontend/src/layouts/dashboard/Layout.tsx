@@ -91,18 +91,18 @@ const DashboardLayout = ({ children }: PropsWithChildren) => {
           className={`${themeConfig.navbar} main-container text-black dark:text-white-dark min-h-screen`}
         >
           {/* BEGIN SIDEBAR */}
-          {/* <Sidebar /> */}hhhhhhhhhh
+          {/* <Sidebar /> */}Sidebar
           {/* END SIDEBAR */}
           {/* BEGIN CONTENT AREA */}
           <div className="main-content">
             {/* BEGIN TOP NAVBAR */}
-            {/* <Header /> */}uuuuuuuuuu
+            {/* <Header /> */}Header
             {/* END TOP NAVBAR */}
             <Suspense>
               <div className={`${themeConfig.animation} p-6 animate__animated`}>
                 {children}
                 {/* BEGIN FOOTER */}
-                {/* <Footer /> */}lllllllll
+                {/* <Footer /> */}Footer
                 {/* END FOOTER */}
               </div>
             </Suspense>

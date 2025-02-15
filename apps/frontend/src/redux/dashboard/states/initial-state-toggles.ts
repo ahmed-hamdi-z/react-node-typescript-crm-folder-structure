@@ -28,4 +28,6 @@ export const initialTogglesState: TogglesState = {
     { code: 'sv', name: 'Swedish' },
     { code: 'tr', name: 'Turkish' },
   ],
+  mainLayout: '',
+  pageTitle: ''
 };

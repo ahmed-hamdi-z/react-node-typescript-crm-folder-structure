@@ -3,7 +3,7 @@ import { TogglesState } from "@/interfaces/dashboard/toggles-interface";
 import i18next from "i18next";
 
 // Toggle theme
-export const toggleTheme = (state: TogglesState, action: PayloadAction<"light" | "dark" | "system" | undefined>) => {
+export const toggleTheme = (state: TogglesState, action: PayloadAction<string |"light" | "dark" | "system" | undefined>) => {
     const payload = action.payload || state.theme;
     localStorage.setItem('theme', payload);
     state.theme = payload;
@@ -26,7 +26,7 @@ export const toggleTheme = (state: TogglesState, action: PayloadAction<"light" |
 };
 
 // Toggle menu
-export const toggleMenu = (state: TogglesState, action: PayloadAction<"horizontal" | "vertical" | "collapsible-vertical" | undefined>) => {
+export const toggleMenu = (state: TogglesState, action: PayloadAction<string | "horizontal" | "vertical" | "collapsible-vertical" | undefined>) => {
     const payload = action.payload || state.menu;
     state.sidebar = false; // Reset sidebar state when menu changes
     localStorage.setItem('menu', payload);
@@ -34,14 +34,14 @@ export const toggleMenu = (state: TogglesState, action: PayloadAction<"horizonta
 };
 
 // Toggle layout
-export const toggleLayout = (state: TogglesState, action: PayloadAction<"full" | "boxed-layout" | undefined>) => {
+export const toggleLayout = (state: TogglesState, action: PayloadAction<string | "full" | "boxed-layout" | undefined>) => {
     const payload = action.payload || state.layout;
     localStorage.setItem('layout', payload);
     state.layout = payload;
 };
 
 // Toggle RTL
-export const toggleRTL = (state: TogglesState, action: PayloadAction<"ltr" | "rtl" | undefined>) => {
+export const toggleRTL = (state: TogglesState, action: PayloadAction<string | "ltr" | "rtl" | undefined>) => {
     const payload = action.payload || state.rtlClass;
     localStorage.setItem('rtlClass', payload);
     state.rtlClass = payload;
@@ -57,7 +57,7 @@ export const toggleAnimation = (state: TogglesState, action: PayloadAction<strin
 };
 
 // Toggle navbar
-export const toggleNavbar = (state: TogglesState, action: PayloadAction<"navbar-sticky" | "navbar-floating" | "navbar-static" | undefined>) => {
+export const toggleNavbar = (state: TogglesState, action: PayloadAction<string | "navbar-sticky" | "navbar-floating" | "navbar-static" | undefined>) => {
     const payload = action.payload || state.navbar;
     localStorage.setItem('navbar', payload);
     state.navbar = payload;

@@ -4,12 +4,12 @@ interface Language {
 }
 
 interface TogglesConfig {
-    theme: "light" | "dark" | "system";
-    menu: "horizontal" | "vertical" | "collapsible-vertical";
-    layout: "full" | "boxed-layout";
-    rtlClass: "ltr" | "rtl";
+    theme: string | "light" | "dark" | "system";
+    menu: string | "horizontal" | "vertical" | "collapsible-vertical";
+    layout: string | "full" | "boxed-layout";
+    rtlClass: string | "ltr" | "rtl";
     animation: string;
-    navbar: "navbar-sticky" | "navbar-floating" | "navbar-static";
+    navbar: string | "navbar-sticky" | "navbar-floating" | "navbar-static";
     semidark: boolean;
     locale: string;
     isDarkMode: boolean;

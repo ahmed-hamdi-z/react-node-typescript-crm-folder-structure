@@ -15,7 +15,8 @@ const dashboardRoutes: RouteObject[] = [
     category: "",
     key: "",
     element: Home
-  }
+  },
+  
 ]
 
 export default dashboardRoutes;
