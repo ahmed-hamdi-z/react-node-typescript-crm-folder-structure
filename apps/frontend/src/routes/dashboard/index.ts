@@ -1,5 +1,5 @@
 // Dependencies
-import { lazy } from "react";
+// import { lazy } from "react";
 
 // Types
 import { RouteObject } from "@/interfaces/global/routes-object-interfaces";

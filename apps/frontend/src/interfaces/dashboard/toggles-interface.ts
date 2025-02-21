@@ -3,25 +3,20 @@ interface Language {
     name: string;
 }
 
-interface TogglesConfig {
-    theme: string | "light" | "dark" | "system";
-    menu: string | "horizontal" | "vertical" | "collapsible-vertical";
-    layout: string | "full" | "boxed-layout";
-    rtlClass: string | "ltr" | "rtl";
-    animation: string;
-    navbar: string | "navbar-sticky" | "navbar-floating" | "navbar-static";
-    semidark: boolean;
-    locale: string;
-    isDarkMode: boolean;
-    sidebar: boolean;
-    mainLayout: string;
-    pageTitle: string;
+interface TogglesState {
+    theme?:  "light" | "dark" | "system";
+    menu?: "horizontal" | "vertical" | "collapsible-vertical";
+    layout?: "full" | "boxed-layout";
+    rtlClass?:string | "ltr" | "rtl";
+    animation?: string;
+    navbar?: "navbar-sticky" | "navbar-floating" | "navbar-static";
+    semidark?: boolean;
+    locale?: string;
+    isDarkMode?: boolean;
+    sidebar?: boolean;
+    languageList?: { code: string; name: string }[];
 }
 
-interface TogglesState extends TogglesConfig {
-    isDarkMode: boolean;
-    languageList: Language[];
-}
 
 interface ToggleButtonProps {
     label: string;
@@ -30,4 +25,5 @@ interface ToggleButtonProps {
     icon?: React.ReactNode;
   }
 
-export { Language, TogglesConfig, TogglesState, ToggleButtonProps };
+export { Language, TogglesState, ToggleButtonProps };
+

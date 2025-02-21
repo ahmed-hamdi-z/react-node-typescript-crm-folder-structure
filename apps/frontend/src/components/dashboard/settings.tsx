@@ -1,26 +1,23 @@
 // src/components/Setting.tsx
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-
-import { RootState } from "@/redux/store";
-import {
-  toggleThemeAction,
-  toggleMenuAction,
-  toggleLayoutAction,
-  toggleRTLAction,
-  toggleAnimationAction,
-  toggleNavbarAction,
-  toggleSemidarkAction,
-} from "@/redux/dashboard/slicers/toggles-slicers";
 
 import ToggleButton from "@/components/dashboard/toggles-btn";
 import LightIcon from "../icons/light-icon";
+import { useToggles } from "@/hooks/dashboard/toggles";
+import { Label } from "../ui/label";
 
 const Setting: React.FC = () => {
-  const themeConfig = useSelector((state: RootState) => state.dashboard.toggles);
-  const dispatch = useDispatch();
   const [showCustomizer, setShowCustomizer] = useState(false);
-
+  const {
+    toggles,
+    toggleTheme,
+    toggleRTL,
+    toggleLayout,
+    toggleAnimation,
+    toggleMenu,
+    toggleNavbar,
+    toggleSemidark
+  } = useToggles();
   return (
     <div>
       <div
@@ -71,20 +68,20 @@ const Setting: React.FC = () => {
             <div className="grid grid-cols-3 gap-2 mt-3">
               <ToggleButton
                 label="Light"
-                isActive={themeConfig.theme === "light"}
-                onClick={() => dispatch(toggleThemeAction("light"))}
+                isActive={toggles.theme === "light"}
+                onClick={() => toggleTheme.mutate("light")}
                 icon={<LightIcon />}
               />
               <ToggleButton
                 label="Dark"
-                isActive={themeConfig.theme === "dark"}
-                onClick={() => dispatch(toggleThemeAction("dark"))}
+                isActive={toggles.theme === "dark"}
+                onClick={() => toggleTheme.mutate("dark")}
                 icon={<LightIcon />}
               />
               <ToggleButton
                 label="System"
-                isActive={themeConfig.theme === "system"}
-                onClick={() => dispatch(toggleThemeAction("system"))}
+                isActive={toggles.theme === "system"}
+                onClick={() => toggleTheme.mutate("system")}
                 icon={<LightIcon />}
               />
             </div>
@@ -101,20 +98,18 @@ const Setting: React.FC = () => {
             <div className="grid grid-cols-3 gap-2 mt-3">
               <ToggleButton
                 label="Horizontal"
-                isActive={themeConfig.menu === "horizontal"}
-                onClick={() => dispatch(toggleMenuAction("horizontal"))}
+                isActive={toggles.menu === "horizontal"}
+                onClick={() => toggleMenu.mutate("horizontal")}
               />
               <ToggleButton
                 label="Vertical"
-                isActive={themeConfig.menu === "vertical"}
-                onClick={() => dispatch(toggleMenuAction("vertical"))}
+                isActive={toggles.menu === "vertical"}
+                onClick={() => toggleMenu.mutate("vertical")}
               />
               <ToggleButton
                 label="Collapsible"
-                isActive={themeConfig.menu === "collapsible-vertical"}
-                onClick={() =>
-                  dispatch(toggleMenuAction("collapsible-vertical"))
-                }
+                isActive={toggles.menu === "collapsible-vertical"}
+                onClick={() => toggleMenu.mutate("collapsible-vertical")}
               />
             </div>
             <div className="mt-5 text-primary">
@@ -122,9 +117,9 @@ const Setting: React.FC = () => {
                 <input
                   type="checkbox"
                   className="form-checkbox"
-                  checked={themeConfig.semidark}
+                  checked={toggles.semidark}
                   onChange={(e) =>
-                    dispatch(toggleSemidarkAction(e.target.checked))
+                    toggleSemidark.mutate(e.target.checked)
                   }
                 />
                 <span>Semi Dark (Sidebar & Header)</span>
@@ -143,13 +138,13 @@ const Setting: React.FC = () => {
             <div className="flex gap-2 mt-3">
               <ToggleButton
                 label="Box"
-                isActive={themeConfig.layout === "boxed-layout"}
-                onClick={() => dispatch(toggleLayoutAction("boxed-layout"))}
+                isActive={toggles.layout === "boxed-layout"}
+                onClick={() => toggleLayout.mutate("boxed-layout")}
               />
               <ToggleButton
                 label="Full"
-                isActive={themeConfig.layout === "full"}
-                onClick={() => dispatch(toggleLayoutAction("full"))}
+                isActive={toggles.layout === "full"}
+                onClick={() => toggleLayout.mutate("full")}
               />
             </div>
           </div>
@@ -165,13 +160,13 @@ const Setting: React.FC = () => {
             <div className="flex gap-2 mt-3">
               <ToggleButton
                 label="LTR"
-                isActive={themeConfig.rtlClass === "ltr"}
-                onClick={() => dispatch(toggleRTLAction("ltr"))}
+                isActive={toggles.rtlClass === "ltr"}
+                onClick={() => toggleRTL.mutate("ltr")}
               />
               <ToggleButton
                 label="RTL"
-                isActive={themeConfig.rtlClass === "rtl"}
-                onClick={() => dispatch(toggleRTLAction("rtl"))}
+                isActive={toggles.rtlClass === "rtl"}
+                onClick={() => toggleRTL.mutate("rtl")}
               />
             </div>
           </div>
@@ -183,38 +178,36 @@ const Setting: React.FC = () => {
             </h5>
             <p className="text-white-dark text-xs">Sticky or Floating.</p>
             <div className="mt-3 flex items-center gap-3 text-primary">
-              <label className="inline-flex mb-0">
+              <Label className="inline-flex mb-0">
                 <input
                   type="radio"
-                  checked={themeConfig.navbar === "navbar-sticky"}
+                  checked={toggles.navbar === "navbar-sticky"}
                   value="navbar-sticky"
                   className="form-radio"
-                  onChange={() => dispatch(toggleNavbarAction("navbar-sticky"))}
+                  onChange={() => toggleNavbar.mutate("navbar-sticky")}
                 />
                 <span>Sticky</span>
-              </label>
-              <label className="inline-flex mb-0">
+              </Label>
+              <Label className="inline-flex mb-0">
                 <input
                   type="radio"
-                  checked={themeConfig.navbar === "navbar-floating"}
+                  checked={toggles.navbar === "navbar-floating"}
                   value="navbar-floating"
                   className="form-radio"
-                  onChange={() =>
-                    dispatch(toggleNavbarAction("navbar-floating"))
-                  }
+                  onChange={() => toggleNavbar.mutate("navbar-floating")}
                 />
                 <span>Floating</span>
-              </label>
-              <label className="inline-flex mb-0">
+              </Label>
+              <Label className="inline-flex mb-0">
                 <input
                   type="radio"
-                  checked={themeConfig.navbar === "navbar-static"}
+                  checked={toggles.navbar === "navbar-static"}
                   value="navbar-static"
                   className="form-radio"
-                  onChange={() => dispatch(toggleNavbarAction("navbar-static"))}
+                  onChange={() => toggleNavbar.mutate("navbar-static")}
                 />
                 <span>Static</span>
-              </label>
+              </Label>
             </div>
           </div>
 
@@ -229,10 +222,8 @@ const Setting: React.FC = () => {
             <div className="mt-3">
               <select
                 className="form-select border-primary text-primary"
-                value={themeConfig.animation}
-                onChange={(e) =>
-                  dispatch(toggleAnimationAction(e.target.value))
-                }
+                value={toggles.animation}
+                onChange={(e) => toggleAnimation.mutate(e.target.value)}
               >
                 <option value=" ">Select Animation</option>
                 <option value="animate__fadeIn">Fade</option>

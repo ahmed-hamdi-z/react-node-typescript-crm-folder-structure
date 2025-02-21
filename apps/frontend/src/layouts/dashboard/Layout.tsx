@@ -1,21 +1,17 @@
 import React from "react";
 import { PropsWithChildren, Suspense, useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import ThemeProvider from "@/components/global/ThemeProvider";
-import { RootState } from "@/redux/store";
-import { toggleSidebarAction } from "@/redux/dashboard/slicers/toggles-slicers";
 // import Footer from './Footer';
 // import Header from './Header';
 import Setting from "@/components/dashboard/settings";
 import Loader from "@/components/global/PageLoading";
+import { useToggles } from "@/hooks/dashboard/toggles";
 // import Sidebar from './Sidebar';
 // import Portals from '@/components/Portals';
 
 const DashboardLayout = ({ children }: PropsWithChildren) => {
-  const themeConfig = useSelector(
-    (state: RootState) => state.dashboard.toggles
-  );
-  const dispatch = useDispatch();
+
+  const { toggles, toggleSidebar  } = useToggles();
 
   const [showLoader, setShowLoader] = useState(true);
   const [showTopButton, setShowTopButton] = useState(false);
@@ -51,9 +47,9 @@ const DashboardLayout = ({ children }: PropsWithChildren) => {
         {/* sidebar menu overlay */}
         <div
           className={`${
-            (!themeConfig.sidebar && "hidden") || ""
-          } fixed inset-0 bg-[black]/60 z-50 lg:hidden`}
-          onClick={() => dispatch(toggleSidebarAction())}
+            (!toggles.sidebar && "hidden") || ""
+          } fixed inset-0 bg-[black]/60 z- 50 lg:hidden`}
+          onClick={() => toggleSidebar }
         ></div>
         {/* screen loader */}
         {showLoader && <Loader onFadeOut={() => setShowLoader(false)} />}
@@ -88,7 +84,7 @@ const DashboardLayout = ({ children }: PropsWithChildren) => {
         {/* END APP SETTING LAUNCHER */}
 
         <div
-          className={`${themeConfig.navbar} main-container text-black dark:text-white-dark min-h-screen`}
+          className={`${toggles.navbar} main-container text-black dark:text-white-dark min-h-screen`}
         >
           {/* BEGIN SIDEBAR */}
           {/* <Sidebar /> */}Sidebar
@@ -99,7 +95,7 @@ const DashboardLayout = ({ children }: PropsWithChildren) => {
             {/* <Header /> */}Header
             {/* END TOP NAVBAR */}
             <Suspense>
-              <div className={`${themeConfig.animation} p-6 animate__animated`}>
+              <div className={`${toggles.animation} p-6 animate__animated`}>
                 {children}
                 {/* BEGIN FOOTER */}
                 {/* <Footer /> */}Footer

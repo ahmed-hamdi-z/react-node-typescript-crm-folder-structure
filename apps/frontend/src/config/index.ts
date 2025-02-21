@@ -20,15 +20,27 @@ const appRoutes = {
   
   const apiRoutes = {
     login: "/auth/login",
-    register: "/auth/register",
-    refresh: "/auth/refresh",
-    packages: "/packages",
-    cards: "/cards",
-    users: {
-      path: "/users",
-      me: "/users/me",
-    },
+    register: "/auth/register"
   };
   
-  export { appRoutes, apiRoutes };
+   const TOGGLES_KEY = "toggles";
+
+   const togglesConfig = () => ({
+    theme: "light",
+    menu: "vertical",
+    layout: "full",
+    rtlClass: "ltr",
+    animation: "fade",
+    navbar: "navbar-static",
+    semidark: false,
+    locale: "en",
+    isDarkMode: false,
+    sidebar: true,
+    languageList: [
+      { code: "en", name: "English" },
+      { code: "es", name: "Español" },
+    ],
+  });
+
+  export { appRoutes, apiRoutes , TOGGLES_KEY, togglesConfig };
   
