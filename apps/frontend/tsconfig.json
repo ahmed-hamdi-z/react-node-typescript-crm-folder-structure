@@ -2,6 +2,7 @@
   "compilerOptions": {
     "jsx": "react",
     "module": "Node16",
+    "moduleResolution": "node16",
     "outDir": "./dist",
     "rootDir": "./src",
     "types": ["vite/client"],
@@ -10,12 +11,12 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "allowSyntheticDefaultImports": true,
-    "lib": ["es2016", "dom"],
-    "target": "es2016",
+    "lib": ["es2019", "dom"],
+    "target": "ES6",
     "baseUrl": ".",
     "paths": {
       "@shared/*": ["../../packages/shared/src/*"],
-      "@/*": ["src/*"]
+      "@/*": ["./src/*"]
     }
   },
   "include": ["src/**/*"],

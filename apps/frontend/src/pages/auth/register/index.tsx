@@ -1,15 +1,14 @@
-
+import React from "react";
 // Components
-import { RegisterCard } from "@/features/dashboard/auth/components/register-card";
-import { protectRoute } from "@/features/dashboard/auth/actions";
+import RegisterCard from "@/components/dashboard/Auth/regiser-card";
+import AuthLayout from "../layout";
 
-import { redirect } from "next/navigation";
-
-const Register = async () => {
-       const user = await protectRoute();
-        if (user) redirect('/');
-
-    return <RegisterCard />
-}
+const Register = () => {
+  return (
+    <AuthLayout>
+      <RegisterCard />;
+    </AuthLayout>
+  );
+};
 
 export default Register;

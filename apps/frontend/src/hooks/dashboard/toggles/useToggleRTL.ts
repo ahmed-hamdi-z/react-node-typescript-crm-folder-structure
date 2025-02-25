@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { TOGGLES_KEY } from "@/config";
+import { TOGGLES_KEY } from "@/config/toggle-config";
 import { TogglesState } from "@/interfaces/dashboard/toggles-interface";
 
 const useToggleRTL = () => {

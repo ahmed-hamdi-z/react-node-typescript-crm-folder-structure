@@ -2,7 +2,7 @@
 import React from "react";
 
 // Providers
-import MainProvider from "./components/global/MainProvider";
+import MainProvider from "./main-provider";
 
 import Dashboard from "./layouts/dashboard";
 import Website from "./layouts/website";
@@ -22,3 +22,4 @@ const App: React.FC = () => {
 }
 
 export default App;
+

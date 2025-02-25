@@ -5,7 +5,6 @@ import { cn } from "@/lib/utils";
 // Separator Props
 import { DottedSeparatorProps } from "@/interfaces/global/separator-props";
 
-
 export const DottedSeparator = ({
   className,
   color = "#d4d4d8",
@@ -29,7 +28,7 @@ export const DottedSeparator = ({
       )}
     >
       <div
-      className={isHorizontal ? "flex-grow" : "flex-grow-0"}
+        className={isHorizontal ? "flex-grow" : "flex-grow-0"}
         style={{
           width: isHorizontal ? "100%" : height,
           height: isHorizontal ? height : "100%",

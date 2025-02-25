@@ -10,21 +10,14 @@ const useRoute = () => {
   const createRoutes = (routes: RouteObject[]): RouteObject[] => routes;
 
   // This function to check if user have access to this route.
-  const validateRoute = (route: RouteObject, roles: string[], returned: "object" | "boolean" = "boolean"): boolean | RouteObject | null => {
-    if (returned === "boolean") {
-      return roles.includes(route.role);
-    } else if (returned === "object") {
-      return roles.includes(route.role) ? route : null;
-    }
-    return null;
+  const validateRoute = (route: RouteObject, roles: string[]): boolean => {
+    return !route.role || roles.includes(route.role);
   };
- 
+
   // This function to check if user have access to this routes.
   const validateRoutes = (routes: RouteObject[], roles: string[]): RouteObject[] => {
-    const resultArray: RouteObject[] = [];
-    routes.forEach((route: RouteObject) => validateRoute(route, roles) && resultArray.push(route));
-    return resultArray;
-  }
+    return routes.filter(route => validateRoute(route, roles));
+  };
 
   // This function used to avoid repeat layout condition.
   const layoutChecker = (layout: string, path: string): string => layout === "website" ? `/${path}` : `${layout}/${path}`;

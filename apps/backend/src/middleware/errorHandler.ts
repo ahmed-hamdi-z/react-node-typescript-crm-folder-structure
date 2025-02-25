@@ -14,6 +14,7 @@ export const errorHandler = (
   res: Response,
   next: NextFunction
 ): void => {
+  
   if (err instanceof AuthError) {
     switch (err.constructor) {
       case UserNotFoundError:

@@ -1,11 +1,10 @@
 // Dependencies
-// import { lazy } from "react";
-
-// Types
 import { RouteObject } from "@/interfaces/global/routes-object-interfaces";
 
 // Pages
-import Home from "@/pages/dashboard/home";
+import Home from "@/pages/dashboard";
+import Login from "@/pages/auth/login";
+import Register from "@/pages/auth/register";
 
 const dashboardRoutes: RouteObject[] = [
   {
@@ -13,10 +12,25 @@ const dashboardRoutes: RouteObject[] = [
     layout: "dashboard",
     role: "global",
     category: "",
-    key: "",
+    key: 1,
     element: Home
   },
-  
+  {
+    path: "register",
+    layout: "dashboard",
+    role: "global",
+    category: "",
+    key: 2,
+    element: Register
+  },
+  {
+    path: "login",
+    layout: "dashboard",
+    role: "global",
+    category: "",
+    key: 2,
+    element: Login
+  },
 ]
 
 export default dashboardRoutes;

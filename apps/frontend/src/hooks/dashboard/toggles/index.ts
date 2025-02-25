@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { TogglesState } from "@/interfaces/dashboard/toggles-interface";
-import { TOGGLES_KEY, togglesConfig } from "@/config";
+import { TOGGLES_KEY, togglesConfig } from "@/config/toggle-config";
 import useToggleTheme from "./useToggleTheme";
 import useToggleMenu from "./useToggleMenu";
 import useToggleLayout from "./useToggleLayout";

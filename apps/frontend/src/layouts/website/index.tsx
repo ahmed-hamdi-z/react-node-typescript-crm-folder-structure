@@ -15,9 +15,9 @@ import websiteRoutes from "@/routes/website";
 
 // Layout
 import WebsiteLayout from "./Layout";
-import { appRoutes } from "@/config";
 
-
+import { appRoutes } from "@/config/routes-config";
+import { RegisterCard } from "@/components/dashboard/Auth/regiser-card";
 
 const Website: FC = () => {
   const { validateRoutes } = useRoute();
@@ -35,6 +35,7 @@ const Website: FC = () => {
             />
           )}
       </Route>
+  
     </Routes>
   )
 }

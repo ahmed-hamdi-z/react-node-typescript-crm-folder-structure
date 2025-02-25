@@ -2,7 +2,6 @@
 import React from "react";
 import { ToggleButtonProps } from "@/interfaces/dashboard/toggles-interface";
 
-
 const ToggleButton: React.FC<ToggleButtonProps> = ({
   label,
   isActive,
@@ -12,12 +11,12 @@ const ToggleButton: React.FC<ToggleButtonProps> = ({
   return (
     <button
       type="button"
-      className={`${
-        isActive ? "btn-primary" : "btn-outline-primary"
-      } btn flex items-center`}
+      className={`${isActive ? "btn-primary" : "btn-outline-primary"} btn `}
       onClick={onClick}
     >
-      {icon && <span className="mr-2">{icon}</span>}
+      {icon && (
+        <span className="w-5 h-5 shrink-0 ltr:mr-2 rtl:ml-2">{icon}</span>
+      )}
       {label}
     </button>
   );

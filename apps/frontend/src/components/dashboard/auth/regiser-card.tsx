@@ -29,20 +29,19 @@ import {
 import { FcGoogle } from "react-icons/fc";
 import { FaGithub } from "react-icons/fa";
 
+import { registerSchema } from "@/models/auth/userSchemas";
 
-import { registerSchema } from "@shared/schemas/index";
-
-import { useRegister } from "../api/use-register";
+import { useRegister } from "@/hooks/dashboard/auth/use-register";
 
 import { Link } from "react-router-dom";
 
-export const RegisterCard = () => {
+const RegisterCard = () => {
   const { mutate, isPending } = useRegister();
 
   const form = useForm<z.infer<typeof registerSchema>>({
     resolver: zodResolver(registerSchema),
     defaultValues: {
-      name: "",
+      username: "",
       email: "",
       password: "",
     },
@@ -74,7 +73,7 @@ export const RegisterCard = () => {
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
             <FormField
-              name="name"
+              name="username"
               control={form.control}
               render={({ field }) => (
                 <FormItem>
@@ -89,7 +88,6 @@ export const RegisterCard = () => {
                 </FormItem>
               )}
             />
-
             <FormField
               name="email"
               control={form.control}
@@ -102,7 +100,6 @@ export const RegisterCard = () => {
                 </FormItem>
               )}
             />
-
             <FormField
               name="password"
               control={form.control}
@@ -119,13 +116,11 @@ export const RegisterCard = () => {
                 </FormItem>
               )}
             />
-
             <Button className="w-full" disabled={isPending} size="lg">
               Register
             </Button>
           </form>
         </Form>
-        
       </CardContent>
       <div className="px-7">
         <DottedSeparator className="" />
@@ -164,3 +159,5 @@ export const RegisterCard = () => {
     </Card>
   );
 };
+
+export default RegisterCard;  

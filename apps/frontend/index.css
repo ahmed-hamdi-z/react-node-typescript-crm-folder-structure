@@ -654,6 +654,7 @@ pre.hljs {
     @apply p-6 rounded-md overflow-x-auto !bg-[#191e3a];
 }
 @layer base {
+   
   :root {
         --background: 0 0% 100%;
         --foreground: 0 0% 3.9%;

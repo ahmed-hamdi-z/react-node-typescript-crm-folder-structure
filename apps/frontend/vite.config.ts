@@ -15,6 +15,8 @@ export default defineConfig({
     sourcemap: true, // Enable source maps for debugging
   },
   server: {
-    port: 3000, // Development server port
+    proxy: {
+      "/rpc": "http://localhost:5000",
+    },
   },
 });
