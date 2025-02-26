@@ -13,7 +13,6 @@ export const useRegister = () => {
     },
     onSuccess: () => {
       toast.success("Registered successfully");
-      window.location.reload();
       queryClient.invalidateQueries({ queryKey: ["current"] }); // Invalidate queries if needed
     },
     onError: (error: Error) => {

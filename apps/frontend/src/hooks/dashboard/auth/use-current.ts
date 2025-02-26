@@ -20,8 +20,7 @@ export const useCurrent = () => {
         throw error;
       }
     },
-    staleTime: 1000 * 60 * 5, // Cache the data for 5 minutes
-    retry: 1, // Retry once if the query fails
+
   });
 
   return query;

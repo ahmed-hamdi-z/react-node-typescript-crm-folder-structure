@@ -1,6 +1,4 @@
-import { Request, Response } from 'express';
-import bcrypt from 'bcryptjs';
-import jwt from 'jsonwebtoken';
+import express from 'express';
 
 import {
   InvalidCredentialsError,
@@ -8,29 +6,34 @@ import {
   UserNotFoundError,
   LogoutFailedError,
 } from '../utils/errors/AuthErrors';
-import { loginSchema, User, userSchemaZod } from '../models/auth/userSchemas';
+import { createUser, getUserByEmail, getUserByRole } from '../models/auth/users';
+import { authentication, randomString } from '../helpers';
 
-// Register a new user
-export const register = async (req: Request, res: Response) => {
+export const register = async (req: express.Request, res: express.Response) => {
   try {
-    const result = userSchemaZod.safeParse(req.body);
-    if (!result.success) {
-      throw new AuthError('Invalid registration data');
+    const { email, password, username, role } = req.body;
+    if (!email || !password || !username) {
+      throw new AuthError('Email, password, and username are required');
     }
 
-    const { username, email, password, role, } = result.data;
-
-    // Check if the user already exists
-    const existingUser = await User.findOne({ $or: [{ username }, { email }] });
+    const existingUser = await getUserByEmail(email);
     if (existingUser) {
       throw new AuthError('User already exists');
     }
-    const _id = uuidv4();
-    // Create a new user
-    const user = new User({ _id, ...result.data, password: await bcrypt.hash(password, 10) });
-    await user.save();
 
-    res.status(201).json({ message: 'User registered successfully', user });
+    const salt = randomString();
+    const user = await createUser({
+      email,
+      username,
+      authentication: {
+        salt,
+        password: authentication(salt, password),
+      },
+      role,
+    });
+
+    res.status(200).json(user).end();
+
   } catch (error) {
     if (error instanceof AuthError) {
       res.status(400).json({ error: error.message });
@@ -41,45 +44,42 @@ export const register = async (req: Request, res: Response) => {
   }
 };
 
-// Login a user
-export const login = async (req: Request, res: Response): Promise<void> => {
-  const jwtSecret = process.env.JWT_SECRET!;
+export const login = async (req: express.Request, res: express.Response) => {
+
+  const AUTH_COOKIE_TOKEN = process.env.AUTH_COOKIE_TOKEN || 'click-crm-auth-cookie';
 
   try {
-    const result = loginSchema.safeParse(req.body);
-    if (!result.success) {
-      throw new AuthError('Invalid login data');  // Handle invalid data
+    const { email, password } = req.body;
+    if (!email || !password) {
+      throw new AuthError('Email and password are required');
     }
 
-    const { email, password } = result.data;
-    const user = await User.findOne({ email }); // Find user by email
+    const user = await getUserByEmail(email).select('+authentication.salt +authentication.password +role');
     if (!user) {
       throw new UserNotFoundError();
     }
 
-    const isMatch = await bcrypt.compare(password, user.password);    // Compare passwords
-    if (!isMatch) {
+    const isMatchHash = await authentication(user.authentication.salt, password);
+    if (user.authentication.password !== isMatchHash) {
       throw new InvalidCredentialsError();
     }
 
-    const token = jwt.sign({ id: user._id, role: user.role }, jwtSecret as string, { expiresIn: '1h' });
+    const salt = randomString();
+    user.authentication.sessionToken = authentication(salt, user._id.toString());
 
-    // Update the user document with the new token
-    user.token = token;
     await user.save();
 
-    res.cookie('token', token, { httpOnly: true }); // Generate JWT token
-    // @ts-ignore
-    req.session.userId = user._id;
-
-    // Send response with token and userId
-    res.status(200).json({
-      message: 'Logged in successfully',
-      token,
-      userId: user._id,
+    res.cookie(AUTH_COOKIE_TOKEN, user.authentication.sessionToken, {
+      httpOnly: true,
+      secure: true,
+      sameSite: 'strict',
+      maxAge: 3600000,
+      domain: 'localhost',
+      path: '/',
     });
 
-  } catch (error: unknown) {
+    res.status(200).json(user).end();
+  } catch (error) {
     if (error instanceof AuthError) {
       res.status(400).json({ error: error.message });
     } else {
@@ -88,24 +88,32 @@ export const login = async (req: Request, res: Response): Promise<void> => {
   }
 };
 
-// Logout a user
-export const logout = (req: Request, res: Response): void => {
-  try {
-    res.clearCookie('token');
-    req.session.destroy((err) => {
-      if (err) {
-        throw new LogoutFailedError();
-      }
-      res.send('Logged out');
-    });
-  } catch (error: unknown) {
-    if (error instanceof AuthError) {
-      res.status(400).json({ error: error.message });
-    }
-  }
-};
+// export const logout = async (req: Request, res: Response): Promise<void> => {
+//   try {
+//     const token = req.cookies.token || req.headers.authorization?.split(' ')[1];
+//     if (!token) {
+//       throw new LogoutFailedError();
+//     }
 
+//     const user = await User.findOne({ tokens: { $elemMatch: { token } } });
+//     if (!user) {
+//       throw new LogoutFailedError();
+//     }
 
+//     await removeTokenFromUser(user, token);
 
-
-
+//     res.clearCookie('token');
+//     req.session.destroy((err) => {
+//       if (err) {
+//         throw new LogoutFailedError();
+//       }
+//       res.send('Logged out');
+//     });
+//   } catch (error: unknown) {
+//     if (error instanceof AuthError) {
+//       res.status(400).json({ error: error.message });
+//     } else {
+//       res.status(500).json({ error: 'Failed to logout' });
+//     }
+//   }
+// };

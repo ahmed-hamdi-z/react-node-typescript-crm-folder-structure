@@ -1,7 +1,7 @@
 // Components
 import { Button } from "@/components/ui/button";
 import { appRoutes } from "@/config/routes-config";
-import { useCurrent } from "@/hooks/dashboard/auth/use-current";
+// import { useCurrent } from "@/hooks/dashboard/auth/use-current";
 import React, { useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
@@ -12,18 +12,18 @@ interface AuthLayoutProps {
 
 // Main Layout For Authentication
 const AuthLayout = ({ children }: AuthLayoutProps) => {
-  const redirect = useNavigate();
+  // const redirect = useNavigate();
   const location = useLocation();
 
   const isLogin = location.pathname === appRoutes.auth.login;
 
-  useEffect(() => {
-    const getUser = async () => {
-      const { data: user } = await useCurrent();
-      if (user) redirect(appRoutes.dashboard.path);
-    };
-    getUser();
-  }, []);
+  // useEffect(() => {
+  //   const getUser = async () => {
+  //     const { data: user } = await useCurrent();
+  //     if (user) redirect(appRoutes.dashboard.path);
+  //   };
+  //   getUser();
+  // }, []);
   return (
     <main className="bg-neutral-100 min-h-screen">
       <div className="mx-auto max-w-screen-2xl p-4">

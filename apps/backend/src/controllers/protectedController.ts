@@ -1,48 +1,26 @@
-import { Request, Response } from 'express';
+import express from 'express';
 
-import { AuthError, UserNotFoundError } from '../utils/errors/AuthErrors';
+import { getUserById, getUsers } from '../models/auth/users';
 
-import { User } from '../models/auth/userSchemas';
-
-// Protected profile route
-export const getProfile = (req: Request, res: Response): void => {
-  res.send('Profile page');
-};
-
-// Admin-only route
-export const getAdminPage = (req: Request, res: Response): void => {
-  res.send('Admin page');
-};
-
-// User-only route
-
-export const getUserPage = async (req: Request, res: Response) => {
+export const getCurrentUser = async (req: express.Request, res: express.Response) => {
   try {
-    // Get the user ID from the session
-    const userId = req.session.id; // Assuming the session stores the user ID
-    if (!userId) {
-      throw new AuthError("User not authenticated");
-    }
+    const user = await getUserById(req.params.id);
 
-    // Fetch the user from the database
-    const user = await User.findById(userId);
-    if (!user) {
-      throw new UserNotFoundError();
-    } 
-
-    // Return the user data (excluding sensitive information like password)
-    res.status(200).json({
-      userId: user._id,
-      username: user.username,
-      email: user.email,
-      role: user.role,
-    });
+    res.status(200).json(user).end();
   } catch (error) {
-    if (error instanceof AuthError) {
-      res.status(401).json({ error: error.message });
-    } else {
-      console.error("Failed to fetch current user:", error);
-      res.status(500).json({ error: "Failed to fetch current user" });
-    }
+    console.log(error);
+    throw new Error('Failed to get all users');
   }
-};
+}
+
+export const getAllUsers = async (req: express.Request, res: express.Response) => {
+  try {
+    const users = await getUsers();
+
+    res.status(200).json(users).end();
+  } catch (error) {
+    console.log(error);
+    throw new Error('Failed to get all users');
+  }
+}
+
