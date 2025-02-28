@@ -5,8 +5,9 @@ import mongoose from 'mongoose';
 dotenv.config();
 const connectToDatabase = async (): Promise<void> => {
 
-  try { const MONGODB_URI = process.env.MONGODB_URI!;
-    
+  try {
+    const MONGODB_URI = process.env.MONGODB_URI!;
+
     await mongoose.connect(MONGODB_URI, {
       // @ts-ignore
       useNewUrlParser: true,

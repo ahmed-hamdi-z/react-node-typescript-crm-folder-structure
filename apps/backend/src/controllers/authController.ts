@@ -1,4 +1,5 @@
 import express from 'express';
+import jwt from 'jsonwebtoken';
 
 import {
   InvalidCredentialsError,
@@ -6,9 +7,13 @@ import {
   UserNotFoundError,
   LogoutFailedError,
 } from '../utils/errors/AuthErrors';
-import { createUser, getUserByEmail, getUserByRole } from '../models/auth/users';
+import { createUser, getUserByEmail } from '../models/auth/users';
 import { authentication, randomString } from '../helpers';
 
+import { isExists } from '../middlewares/authMiddleware';
+
+const AUTH_COOKIE = process.env.AUTH_COOKIE_SESSION_TOKEN! || 'click-crm-auth-cookie-for-session-token';
+const JWT_SECRET = process.env.JWT_SECRET_TOKEN! || 'secret'; 
 export const register = async (req: express.Request, res: express.Response) => {
   try {
     const { email, password, username, role } = req.body;
@@ -32,7 +37,7 @@ export const register = async (req: express.Request, res: express.Response) => {
       role,
     });
 
-    res.status(200).json(user).end();
+    res.status(201).json({ message: `user created successfully ` + user }).end();
 
   } catch (error) {
     if (error instanceof AuthError) {
@@ -45,9 +50,6 @@ export const register = async (req: express.Request, res: express.Response) => {
 };
 
 export const login = async (req: express.Request, res: express.Response) => {
-
-  const AUTH_COOKIE_TOKEN = process.env.AUTH_COOKIE_TOKEN || 'click-crm-auth-cookie';
-
   try {
     const { email, password } = req.body;
     if (!email || !password) {
@@ -64,12 +66,16 @@ export const login = async (req: express.Request, res: express.Response) => {
       throw new InvalidCredentialsError();
     }
 
+    
+    const token = jwt.sign({ id: user._id, role: user.role }, JWT_SECRET, { expiresIn: '1h' });
+
     const salt = randomString();
     user.authentication.sessionToken = authentication(salt, user._id.toString());
+    user.authentication.sessionToken = token
 
     await user.save();
 
-    res.cookie(AUTH_COOKIE_TOKEN, user.authentication.sessionToken, {
+    res.cookie(AUTH_COOKIE, user.authentication.sessionToken, {
       httpOnly: true,
       secure: true,
       sameSite: 'strict',
@@ -88,32 +94,33 @@ export const login = async (req: express.Request, res: express.Response) => {
   }
 };
 
-// export const logout = async (req: Request, res: Response): Promise<void> => {
-//   try {
-//     const token = req.cookies.token || req.headers.authorization?.split(' ')[1];
-//     if (!token) {
-//       throw new LogoutFailedError();
-//     }
 
-//     const user = await User.findOne({ tokens: { $elemMatch: { token } } });
-//     if (!user) {
-//       throw new LogoutFailedError();
-//     }
+export const logout = async (req: express.Request, res: express.Response) => {
+  try {
+    const existingUser = await isExists(req);
 
-//     await removeTokenFromUser(user, token);
+    existingUser.authentication.sessionToken = null;
+    await existingUser.save();
 
-//     res.clearCookie('token');
-//     req.session.destroy((err) => {
-//       if (err) {
-//         throw new LogoutFailedError();
-//       }
-//       res.send('Logged out');
-//     });
-//   } catch (error: unknown) {
-//     if (error instanceof AuthError) {
-//       res.status(400).json({ error: error.message });
-//     } else {
-//       res.status(500).json({ error: 'Failed to logout' });
-//     }
-//   }
-// };
+    res.clearCookie(AUTH_COOKIE, {
+      maxAge: 0,
+      httpOnly: true,
+      secure: true,
+      sameSite: 'strict',
+      domain: 'localhost',
+      path: '/',
+    });
+    // Send success response
+    res.status(200).json({ message: 'Logout successful' }).end();
+  } catch (error) {
+    console.error('Logout failed:', error);
+
+    if (error instanceof UserNotFoundError) {
+      res.status(404).json({ error: 'User not found' });
+    } else if (error instanceof LogoutFailedError) {
+      res.status(400).json({ error: error.message });
+    } else {
+      res.status(500).json({ error: 'Logout failed due to an internal error' });
+    }
+  }
+};

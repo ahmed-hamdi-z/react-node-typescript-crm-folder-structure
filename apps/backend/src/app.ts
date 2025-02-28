@@ -1,12 +1,9 @@
 import express from "express";
 import cors from "cors";
-import session from "express-session";
 import cookieParser from "cookie-parser";
 import bodyParser from "body-parser";
 import dotenv from "dotenv";
 import { errorHandler } from "./middlewares/errorHandler";
-// import authRoutes from "./router/authRoutes";
-// import protectedRoutes from "./router/protectedRoutes";
 // import rpcServer from "./rpcServer";
 import router from "./router";
 
@@ -14,7 +11,6 @@ import router from "./router";
 dotenv.config();
 
 const app = express();
-// const jwtSecret = process.env.JWT_SECRET!;
 
 // Middleware
 const corsOptions = {
@@ -24,23 +20,12 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 
-app.use(bodyParser.json()); // Parse JSON request bodies
-app.use(express.json()); // Parse JSON request bodies (alternative)
-app.use(cookieParser()); // Parse cookies
+app.use(bodyParser.json()); 
+app.use(express.json()); 
+app.use(cookieParser()); 
 
 // Routes
 app.use('/', router()) ;
-
-// Session management
-// app.use(
-//   session({
-//     secret: jwtSecret,
-//     resave: false,
-//     saveUninitialized: true,
-//     cookie: { secure: false, maxAge: 1000 * 60 * 60 * 24 }, // 1 day
-//   })
-// );
-
 
 // RPC Endpoint
 // app.options("/rpc", cors(corsOptions));

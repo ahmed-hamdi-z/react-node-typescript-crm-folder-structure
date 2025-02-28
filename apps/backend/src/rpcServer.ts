@@ -1,22 +1,33 @@
-// rpcServer.ts
+import express from "express";
 import { JSONRPCServer } from "json-rpc-2.0";
 import { register, login, logout } from "./controllers/authController";
-import { verifyTokenMiddleware } from "./middlewares/authMiddleware";
-import { Request, Response } from "express";
-import { getUserPage } from "./controllers/protectedController";
+import { isAuthenticated } from "./middlewares/authMiddleware";
+import { getCurrentUser, getAllUsers } from "./controllers/protectedController";
 
 const rpcServer = new JSONRPCServer();
 
-const wrapRequest = (params: any, cookies: any): Request => {
+interface RPCRequest {
+  params: any;
+  cookies: any;
+}
+
+interface RPCResponse {
+  status: (code: number) => RPCResponse;
+  json: (data: any) => any;
+  sendStatus: (code: number) => any;
+  send: (body: any) => any;
+}
+
+const wrapRequest = (params: any, cookies: any): express.Request => {
   return {
     body: params,
     cookies,
-  } as Request;
+  } as express.Request;
 };
 
-const wrapResponse = (): Response => {
-  const res: Partial<Response> = {
-    status: (code: number) => {
+const wrapResponse = (): RPCResponse => {
+  const res: Partial<RPCResponse> = {
+    status: (code) => {
       return {
         json: (data: any) => {
           return { statusCode: code, data };
@@ -24,15 +35,15 @@ const wrapResponse = (): Response => {
         status: code,
         sendStatus: (code: number) => ({ statusCode: code }),
         send: (body: any) => body,
-      } as unknown as Response;
+      } as unknown as RPCResponse;
     },
   };
-  return res as Response;
+  return res as RPCResponse;
 };
 
-const authenticate = async (req: Request, res: Response) => {
-  return new Promise<void>((resolve, reject) => {
-    verifyTokenMiddleware(req, res, (error) => {
+const authenticate = async (req: express.Request, res: RPCResponse): Promise<void> => {
+  return new Promise((resolve, reject) => {
+    isAuthenticated(req, res as express.Response, (error) => {
       if (error) {
         reject(error);
       } else {
@@ -42,40 +53,50 @@ const authenticate = async (req: Request, res: Response) => {
   });
 };
 
-rpcServer.addMethod("register", async (params, rawRequest: any) => {
-  const req = wrapRequest(params, rawRequest.cookies);
-  const res = wrapResponse();
-  return await register(req, res);
-});
+// Helper function to handle RPC methods with authentication
+const createRPCMethod = (method: (req: express.Request, res: RPCResponse) => Promise<any>) => {
+  return async (params: any, rawRequest: RPCRequest) => {
+    const req = wrapRequest(params, rawRequest.cookies);
+    const res = wrapResponse();
+    return await method(req, res);
+  };
+};
 
-rpcServer.addMethod("login", async (params, rawRequest: any) => {
-  const req = wrapRequest(params, rawRequest.cookies);
-  const res = wrapResponse();
-  return await login(req, res);
-});
+// Register RPC methods
+rpcServer.addMethod("register", createRPCMethod(register));
+rpcServer.addMethod("login", createRPCMethod(login));
+rpcServer.addMethod("logout", createRPCMethod(logout));
 
-rpcServer.addMethod("logout", async (_, rawRequest: any) => {
-  const req = wrapRequest({}, rawRequest.cookies);
-  const res = wrapResponse();
-  return await logout(req, res);
-});
-
-rpcServer.addMethod("getUserPage", async (params, rawRequest: any) => {
+// Protected RPC methods
+rpcServer.addMethod("getCurrentUser", async (params: any, rawRequest: RPCRequest) => {
   const req = wrapRequest(params, rawRequest.cookies);
   const res = wrapResponse();
 
   try {
     await authenticate(req, res);
-    return await getUserPage(req, res);
+    return await getCurrentUser(req, res as express.Response);
   } catch (error) {
     throw new Error("Unauthorized: Invalid token");
   }
 });
 
+rpcServer.addMethod("getAllUsers", async (params: any, rawRequest: RPCRequest) => {
+  const req = wrapRequest(params, rawRequest.cookies);
+  const res = wrapResponse();
+
+  try {
+    await authenticate(req, res);
+    return await getAllUsers(req, res as express.Response);
+  } catch (error) {
+    throw new Error("Unauthorized: Invalid token");
+  }
+});
+
+// Additional protected methods
 const protectedMethods = ["getProfile", "getAdminPage", "getUserPage"];
 
 protectedMethods.forEach((method) => {
-  rpcServer.addMethod(method, async (params, rawRequest: any) => {
+  rpcServer.addMethod(method, async (params: any, rawRequest: RPCRequest) => {
     const req = wrapRequest(params, rawRequest.cookies);
     const res = wrapResponse();
 

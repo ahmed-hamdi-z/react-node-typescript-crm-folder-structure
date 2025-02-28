@@ -8,6 +8,5 @@ const router = express.Router();
 export default (): express.Router => {
     authRoutes(router);
     protectedRoutes(router);
-    
     return router;
 }

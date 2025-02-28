@@ -20,7 +20,7 @@ export class InvalidCredentialsError extends AuthError {
 }
 
 export class AccessDeniedError extends Error {
-  constructor(message: string = 'Access Denied') {
+  constructor(message: string ) {
     super(message);
     this.name = 'AccessDeniedError';
   }

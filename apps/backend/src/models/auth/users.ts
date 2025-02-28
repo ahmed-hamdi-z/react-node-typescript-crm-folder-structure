@@ -10,15 +10,13 @@ const userSchema: Schema = new Schema({
     sessionToken: { type: String, select: false },
   },
 
-  role: { type: String, enum: ['user', 'admin'], default: 'user', select: false },
+  role: { type: String, enum: ['user', 'admin', 'manager'], default: 'user', select: false },
   // first_name: { type: String, trim: true },
   // last_name: { type: String, trim: true },
   // image: { type: String, default: '' },
   // phone: { type: String, trim: true },
   // country: { type: String, trim: true },
-  created_at: { type: String, default: new Date().toISOString() },
-  updated_at: { type: String, default: new Date().toISOString() },
-});
+}, { timestamps: true });
 
 export interface User extends Document {
   username: string;
@@ -26,15 +24,14 @@ export interface User extends Document {
   authentication: {
     password: string;
     salt: string;
-    sessionToken: string;
+    sessionToken: string | null;
   };
   role: string;
-  created_at: string;
-  updated_at: string;
 }
 
 
 export const UserModle: Model<User> = mongoose.model<User>('User', userSchema);
+
 
 export const getUsers = () => UserModle.find();
 
@@ -53,3 +50,5 @@ export const createUser = (values: Record<string, any>) => new UserModle(values)
 export const deleteUserById = (id: string) => UserModle.findByIdAndDelete({ _id: id });
 
 export const updateUserById = (id: string, values: Record<string, any>) => UserModle.findByIdAndUpdate(id, values);
+
+
