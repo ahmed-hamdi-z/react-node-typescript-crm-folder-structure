@@ -7,13 +7,15 @@ import {
   UserNotFoundError,
   LogoutFailedError,
 } from '../utils/errors/AuthErrors';
+
 import { createUser, getUserByEmail } from '../models/auth/users';
 import { authentication, randomString } from '../helpers';
 
 import { isExists } from '../middlewares/authMiddleware';
 
 const AUTH_COOKIE = process.env.AUTH_COOKIE_SESSION_TOKEN! || 'click-crm-auth-cookie-for-session-token';
-const JWT_SECRET = process.env.JWT_SECRET_TOKEN! || 'secret'; 
+const JWT_SECRET = process.env.JWT_SECRET_TOKEN! || 'secret';
+
 export const register = async (req: express.Request, res: express.Response) => {
   try {
     const { email, password, username, role } = req.body;
@@ -29,7 +31,7 @@ export const register = async (req: express.Request, res: express.Response) => {
     const salt = randomString();
     const user = await createUser({
       email,
-      username,
+      username, 
       authentication: {
         salt,
         password: authentication(salt, password),
@@ -37,8 +39,7 @@ export const register = async (req: express.Request, res: express.Response) => {
       role,
     });
 
-    res.status(201).json({ message: `user created successfully ` + user }).end();
-
+    res.status(201).json({user: user }).end();
   } catch (error) {
     if (error instanceof AuthError) {
       res.status(400).json({ error: error.message });
@@ -66,34 +67,31 @@ export const login = async (req: express.Request, res: express.Response) => {
       throw new InvalidCredentialsError();
     }
 
-    
     const token = jwt.sign({ id: user._id, role: user.role }, JWT_SECRET, { expiresIn: '1h' });
 
-    const salt = randomString();
-    user.authentication.sessionToken = authentication(salt, user._id.toString());
-    user.authentication.sessionToken = token
-
+    user.authentication.sessionToken = token;
     await user.save();
 
-    res.cookie(AUTH_COOKIE, user.authentication.sessionToken, {
+    res.cookie(AUTH_COOKIE, token, {
       httpOnly: true,
       secure: true,
       sameSite: 'strict',
-      maxAge: 3600000,
+      maxAge: 60 * 60 * 24 * 30,
       domain: 'localhost',
       path: '/',
     });
 
-    res.status(200).json(user).end();
+    res.status(200).json({ user, token }).end();
+    
   } catch (error) {
     if (error instanceof AuthError) {
       res.status(400).json({ error: error.message });
     } else {
-      throw new AuthError('Failed to login');
+      console.error('Login error:', error);
+      res.status(500).json({ error: 'Failed to login' });
     }
   }
 };
-
 
 export const logout = async (req: express.Request, res: express.Response) => {
   try {
@@ -105,12 +103,12 @@ export const logout = async (req: express.Request, res: express.Response) => {
     res.clearCookie(AUTH_COOKIE, {
       maxAge: 0,
       httpOnly: true,
-      secure: true,
+      secure: process.env.NODE_ENV! === 'production',
       sameSite: 'strict',
-      domain: 'localhost',
+      domain: process.env.NODE_ENV! === 'production' ? 'your-production-domain.com' : 'localhost',
       path: '/',
     });
-    // Send success response
+
     res.status(200).json({ message: 'Logout successful' }).end();
   } catch (error) {
     console.error('Logout failed:', error);

@@ -8,10 +8,10 @@ import { errorHandler } from "./middlewares/errorHandler";
 import router from "./router";
 
 // Load environment variables
-dotenv.config();
+
 
 const app = express();
-
+dotenv.config();
 // Middleware
 const corsOptions = {
   origin: "http://localhost:5173", // Allow only this origin

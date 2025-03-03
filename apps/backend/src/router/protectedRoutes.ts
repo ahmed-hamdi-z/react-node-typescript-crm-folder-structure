@@ -5,6 +5,6 @@ import { deleteUser, getAllUsers, getUser } from '../controllers/protectedContro
 
 export default (router: express.Router) => {
     router.get('/user/:id', isAuthenticated, getUser);
-    router.get('/users',  checkRoles('admin'), getAllUsers);
+    router.get('/users',  checkRoles('user'), getAllUsers);
     router.delete('/delete/user/:id', isAuthenticated, checkRoles('admin'), deleteUser);
-};
+};  

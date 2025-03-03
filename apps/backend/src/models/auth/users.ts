@@ -10,7 +10,7 @@ const userSchema: Schema = new Schema({
     sessionToken: { type: String, select: false },
   },
 
-  role: { type: String, enum: ['user', 'admin', 'manager'], default: 'user', select: false },
+  role: { type: String, enum: ['user', 'admin', 'manager'], default: 'user',},
   // first_name: { type: String, trim: true },
   // last_name: { type: String, trim: true },
   // image: { type: String, default: '' },
@@ -18,7 +18,7 @@ const userSchema: Schema = new Schema({
   // country: { type: String, trim: true },
 }, { timestamps: true });
 
-export interface User extends Document {
+export interface User extends Document { 
   username: string;
   email: string; 
   authentication: {
