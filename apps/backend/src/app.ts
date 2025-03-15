@@ -7,25 +7,45 @@ import { errorHandler } from "./middlewares/errorHandler";
 // import rpcServer from "./rpcServer";
 import router from "./router";
 
-// Load environment variables
-
-
 const app = express();
-dotenv.config();
-// Middleware
-const corsOptions = {
-  origin: "http://localhost:5173", // Allow only this origin
-  credentials: true, // Allow credentials (cookies, authorization headers)
-};
 
+dotenv.config();
+app.use(express.json()); 
+
+const corsOptions = {
+  origin: "http://localhost:5173", 
+  credentials: true, 
+};
 app.use(cors(corsOptions));
 
 app.use(bodyParser.json()); 
-app.use(express.json()); 
 app.use(cookieParser()); 
 
 // Routes
 app.use('/', router()) ;
+
+
+app.use(errorHandler);
+
+
+export default app;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // RPC Endpoint
 // app.options("/rpc", cors(corsOptions));
@@ -48,7 +68,3 @@ app.use('/', router()) ;
 // });
 
 // Error handling
-app.use(errorHandler);
-
-
-export default app;

@@ -1,13 +1,10 @@
 import dotenv from "dotenv";
-
 import mongoose from 'mongoose';
+import { MONGODB_URI } from "../constants/env";
 
 dotenv.config();
-const connectToDatabase = async (): Promise<void> => {
-
+const connectToDatabase = async () => {
   try {
-    const MONGODB_URI = process.env.MONGODB_URI!;
-
     await mongoose.connect(MONGODB_URI, {
       // @ts-ignore
       useNewUrlParser: true,
@@ -19,5 +16,4 @@ const connectToDatabase = async (): Promise<void> => {
     process.exit(1);
   }
 };
-
 export default connectToDatabase;
