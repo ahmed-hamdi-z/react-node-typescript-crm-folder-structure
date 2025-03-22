@@ -3,49 +3,43 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 import bodyParser from "body-parser";
 import dotenv from "dotenv";
-import { errorHandler } from "./middlewares/errorHandler";
+import errorHandler from "./middlewares/errorHandler";
 // import rpcServer from "./rpcServer";
 import router from "./router";
+import { APP_ORIGIN } from "./constants/env";
+
+import { OK } from "./constants/http";
 
 const app = express();
 
 dotenv.config();
-app.use(express.json()); 
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 const corsOptions = {
-  origin: "http://localhost:5173", 
-  credentials: true, 
+  origin: APP_ORIGIN,
+  credentials: true,
 };
 app.use(cors(corsOptions));
 
-app.use(bodyParser.json()); 
-app.use(cookieParser()); 
+app.use(bodyParser.json());
+app.use(cookieParser());
 
 // Routes
-app.use('/', router()) ;
+app.get(
+  "/",
+  (req: express.Request, res: express.Response, next: express.NextFunction) => {
+    res.status(OK).json({
+      status: "success",
+    });
+  }
+);
 
+app.use('/', router()) ;
 
 app.use(errorHandler);
 
-
 export default app;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // RPC Endpoint
 // app.options("/rpc", cors(corsOptions));

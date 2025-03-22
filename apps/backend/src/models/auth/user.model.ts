@@ -1,52 +1,59 @@
-import mongoose, { Document, Model, Schema } from 'mongoose';
-import { HashPasswords } from '@/helpers';
+import mongoose from "mongoose";
+import { compareValue, hashValue } from "../../utils/bcrypt";
 
-const userSchema: Schema = new Schema({
-  username: { type: String, required: true },
-  email: { type: String, required: true },
-  authentication: {
-    password: { type: String, required: true, select: false },
-    salt: { type: String, select: false },
-    sessionToken: { type: String, select: false },
-  },
-  role: { type: String, enum: ['user', 'admin', 'manager'], default: 'user', },
-  verified: { type: Boolean, default: false },
-  // first_name: { type: String, trim: true },
-  // last_name: { type: String, trim: true },
-  // image: { type: String, default: '' },
-  // phone: { type: String, trim: true },
-  // country: { type: String, trim: true },
-}, 
-{ timestamps: true });
-
-export interface User extends Document {
-  username: string;
+export interface UserDoc extends mongoose.Document {
+  userName: String;
   email: string;
-  authentication: {
-    password: string;
-    salt: string;
-    sessionToken: string | null;
-  };
+  password: string;
   role: string;
   verified: boolean;
-  comparePassword(value: string): Promise<boolean>;
+  createdAt: Date;
+  updatedAt: Date;
+  comparePassword(candidatePassword: string): Promise<boolean>;
+  omitPassword(): Pick < UserDoc, "_id" | "email" | "role" | "verified" | "createdAt" | "updatedAt" | "__v" >;
 }
+const userSchema = new mongoose.Schema<UserDoc>(
+  {
+    userName: {
+      type: String,
+    },
+    email: {
+      type: String,
+      required: true,
+      unique: true,
+    },
+    password: {
+      type: String,
+      required: true,
+    },
+    role: { type: String, enum: ["user", "admin", "manager"], default: "user" },
+    verified: {
+      type: Boolean,
+      required: true,
+      default: false,
+    },
+  },
+  {
+    timestamps: true,
+  }
+);
 
-export const UserModle: Model<User> = mongoose.model<User>('User', userSchema);
-export const getUsers = () => UserModle.find();
-export const getUserByEmail = (email: string) => UserModle.findOne({ email });
-export const getUserById = (id: string) => UserModle.findById(id);
-export const getUserByRole = (role: string) => UserModle.findOne({ role });
-export const getUserBySessionToken = (sessionToken: string) => UserModle.findOne({
-  'authentication.sessionToken': sessionToken
+userSchema.pre("save", async function (next) {
+  if (!this.isModified("password")) {
+    return next();
+  }
+  this.password = await hashValue(this.password);
+  next();
 });
 
-export const createUser = (values: Record<string, any>) => new UserModle(values).save().then((user) => user.toObject());
-export const deleteUserById = (id: string) => UserModle.findByIdAndDelete({ _id: id });
-export const updateUserById = (id: string, values: Record<string, any>) => UserModle.findByIdAndUpdate(id, values);
-
-export const comparePasswords = async (value: string, salt: string, hash: string) => await HashPasswords(salt, value, hash);
-
-userSchema.methods.comparePassword = async function (value: string) { 
-  return comparePasswords(value, this.authentication.salt, this.authentication.password); 
+userSchema.methods.comparePassword = async function (val: string) {
+  return compareValue(val, this.password);
 };
+
+userSchema.methods.omitPassword = function () {
+  const user = this.toObject();
+  delete user.password;
+  return user;
+}
+const UserModel = mongoose.model<UserDoc>("User", userSchema);
+export default UserModel;

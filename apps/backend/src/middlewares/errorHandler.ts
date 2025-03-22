@@ -1,66 +1,41 @@
-import {Request, NextFunction, Response } from 'express';
-import {
-  HandelErrors,
-  NotFound,
-  Unauthorized,
-  Forbidden,
-  Conflict,
-  UnprocessableContent,
-  BadRequest,
-  OK,
-  AccessDenied,
-  Invalid,
-  FailedError,
-  Created,
-} from '../utils/errors/Errors';
+import z from "zod";
+import { BAD_REQUEST, INTERNAL_SERVER_ERROR } from "../constants/http";
+import express, { ErrorRequestHandler } from "express";
+import AppError from "../utils/errors";
 
-
-export const errorHandler = (
-  err: Error,
-  req: Request,
-  res: Response,
-  next: NextFunction
-): void => {
-  
-  if (err instanceof HandelErrors) {
-    switch (err.constructor) {
-      case AccessDenied:
-        res.status(403).json({ error: err.message });
-        break;
-      case Invalid:
-        res.status(401).json({ error: err.message });
-        break;
-      case FailedError:
-        res.status(500).json({ error: err.message });
-        break;
-        case OK:
-          res.status(200).json({ error: err.message });
-          break;
-        case Created:
-          res.status(201).json({ error: err.message });
-          break;
-        case NotFound:
-          res.status(404).json({ error: err.message });
-          break;
-        case Unauthorized:
-          res.status(401).json({ error: err.message });
-          break;
-        case Forbidden:
-          res.status(403).json({ error: err.message });
-          break;
-        case Conflict:
-          res.status(409).json({ error: err.message });
-          break;
-        case UnprocessableContent:
-          res.status(422).json({ error: err.message });
-          break;
-        case BadRequest:
-          res.status(400).json({ error: err.message });
-          break;
-      default:
-        res.status(400).json({ error: err.message });
-    }
-  } else {
-    res.status(500).json({ error: 'Internal Server Error' });
-  }
+const handleZodError = (res: express.Response, error: z.ZodError) => {
+  const errors = error.issues.map((err) => ({
+    path: err.path.join("."),
+    message: err.message,
+  }));
+  res.status(BAD_REQUEST).json({
+    message: error.message,
+    errors,
+  });
 };
+
+const handleAppError = (res: express.Response, error: AppError) => {
+  res.status(error.statusCode).json({
+    message: error.message,
+    errorCode: error.errorCode,
+  });
+};
+const errorHandler: ErrorRequestHandler = (
+  error: Error,
+  req: express.Request,
+  res: express.Response,
+  next: express.NextFunction
+) => {
+  console.log(`path ${req.path}`, error);
+  if (error instanceof z.ZodError) {
+    return handleZodError(res, error);
+  }
+
+  if (error instanceof AppError) {
+    return handleAppError(res, error);
+  }
+
+  res.status(INTERNAL_SERVER_ERROR).send("internal server error");
+};
+
+export default errorHandler;

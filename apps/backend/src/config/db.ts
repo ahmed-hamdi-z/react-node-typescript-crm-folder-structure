@@ -1,8 +1,6 @@
-import dotenv from "dotenv";
 import mongoose from 'mongoose';
-import { MONGODB_URI } from "../constants/env";
+import { MONGODB_URI } from '../constants/env';
 
-dotenv.config();
 const connectToDatabase = async () => {
   try {
     await mongoose.connect(MONGODB_URI, {
